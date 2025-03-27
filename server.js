@@ -1,24 +1,12 @@
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+const db = require("./db"); // Import database connection from db.js
+
 const app = express();
-require('dotenv').config();
 
-// Allow all origins (dev only)
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
-// Routes
-const hotelRoutes = require('./routes/hotels');
-const roomRoutes = require('./routes/rooms');
-const customerRoutes = require('./routes/customers');
-const bookingRoutes = require('./routes/bookings');
-
-app.use('/hotels', hotelRoutes);
-app.use('/rooms', roomRoutes);
-app.use('/customers', customerRoutes);
-app.use('/bookings', bookingRoutes);
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const PORT = 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
